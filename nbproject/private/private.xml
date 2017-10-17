@@ -3,15 +3,28 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group name="OrionPrj">
-            <file>file:/var/www/html/Projects/JewelShop/database/migrations/2014_10_12_100000_create_password_resets_table.php</file>
-            <file>file:/var/www/html/Projects/JewelShop/database/migrations/2017_10_06_055340_create_access_logs_table.php</file>
-            <file>file:/var/www/html/Projects/JewelShop/database/migrations/2017_10_05_105013_create_roles_table.php</file>
+            <file>file:/var/www/html/Projects/JewelShop/resources/views/welcome.blade.php</file>
+            <file>file:/var/www/html/Projects/JewelShop/config/app.php</file>
+            <file>file:/var/www/html/Projects/JewelShop/resources/views/defaultHome.blade.php</file>
+            <file>file:/var/www/html/Projects/JewelShop/app/Http/Controllers/ProfileController.php</file>
+            <file>file:/var/www/html/Projects/JewelShop/resources/views/layouts/footer.blade.php</file>
+            <file>file:/var/www/html/Projects/JewelShop/app/Models/Roles.php</file>
+            <file>file:/var/www/html/Projects/JewelShop/resources/views/layouts/sidebar.blade.php</file>
+            <file>file:/var/www/html/Projects/JewelShop/app/Models/Users.php</file>
             <file>file:/var/www/html/Projects/JewelShop/composer.json</file>
             <file>file:/var/www/html/Projects/JewelShop/database/migrations/2017_10_06_051132_create_users_table.php</file>
-            <file>file:/var/www/html/Projects/JewelShop/database/migrations/2017_10_05_105747_create_regions_table.php</file>
-            <file>file:/var/www/html/Projects/JewelShop/.env</file>
-            <file>file:/var/www/html/Projects/JewelShop/database/migrations/2017_10_06_055557_create_sales_table.php</file>
-            <file>file:/var/www/html/Projects/JewelShop/database/seeds/RegionsSeeder.php</file>
+            <file>file:/var/www/html/Projects/JewelShop/resources/views/layouts/header.blade.php</file>
+            <file>file:/var/www/html/Projects/JewelShop/app/Http/routes.php</file>
+            <file>file:/var/www/html/Projects/JewelShop/resources/views/profile.blade.php</file>
+            <file>file:/var/www/html/Projects/JewelShop/app/Http/Controllers/Auth/LoginController.php</file>
+            <file>file:/var/www/html/Projects/JewelShop/resources/views/layouts/app.blade.php</file>
+            <file>file:/var/www/html/Projects/JewelShop/resources/views/layouts/defaultSidebar.blade.php</file>
+            <file>file:/var/www/html/Projects/JewelShop/app/Http/Controllers/HomeController.php</file>
+            <file>file:/var/www/html/Projects/JewelShop/database/seeds/UsersSeeder.php</file>
+            <file>file:/var/www/html/Projects/JewelShop/app/Repositories/UserRepository.php</file>
+            <file>file:/var/www/html/Projects/JewelShop/nbproject/project.xml</file>
+            <file>file:/var/www/html/Projects/JewelShop/routes/web.php</file>
+            <file>file:/var/www/html/Projects/JewelShop/resources/views/home.blade.php</file>
         </group>
     </open-files>
 </project-private>

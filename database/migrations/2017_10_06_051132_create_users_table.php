@@ -22,6 +22,8 @@ class CreateUsersTable extends Migration
                 $table->integer('region_id')->unsigned();
                 $table->integer('role_id')->unsigned();
                 $table->TinyInteger('status');
+                $table->timestamp('last_login');
+                //$table->timestamp('last_logout');
                 $table->rememberToken();
                 $table->timestamps();
             });

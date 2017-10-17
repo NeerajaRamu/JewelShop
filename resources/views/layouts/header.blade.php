@@ -9,7 +9,7 @@ $user           = Auth::user();
         <ul class="nav navbar-top-links navbar-right">
             <li>
                 <span class="m-r-sm text-muted welcome-message">
-                    Welcome to Platform Science, {{ Auth::user()->first_name }}
+                    Welcome to Swarna's Jewellery {{ Auth::user()->first_name }}
                 </span>
             </li>
             <li>

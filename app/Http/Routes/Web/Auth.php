@@ -6,12 +6,12 @@ Route::group(['prefix' => 'auth', 'namespace' => 'Auth', 'as' => 'auth.', 'middl
         'as'   => 'register',
         'uses' => 'AuthController@signup'
     ]);
-
+*/
     Route::post('register', [
         'as'   => 'register',
         'uses' => 'AuthController@register'
     ]);
-    */
+
 
     Route::get('login', [
         'as'   => 'login',

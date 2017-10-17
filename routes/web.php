@@ -27,3 +27,12 @@ Route::group(['middleware' => 'auth'], function () {
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
+Route::get('/profile', ['as' => 'profile', 'uses' => 'ProfileController@index']);
+Route::get('/users', ['as' => 'users', 'uses' => 'UsersController@index']);
+//Route::get('/auth/register', ['as' => 'auth/register', 'uses' => 'RegisterController@index']);
+Route::get('/CreateSale', ['as' => 'CreateSale', 'uses' => 'SalesController@create']);
+Route::get('/MySales', ['as' => 'MySales', 'uses' => 'SalesController@index']);
+Route::get('/ShopSales', ['as' => 'ShopSales', 'uses' => 'SalesController@index']);
+//Route::get('auth/logout', 'Auth\AuthController@logout');
+//Route::get('/auth/logout', 'Auth\AuthController@logout');
+//Route::get('logout', ['as' => 'logout', 'uses' => 'Auth\AuthController@getLogout']);

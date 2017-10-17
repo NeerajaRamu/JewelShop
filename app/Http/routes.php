@@ -22,3 +22,5 @@ foreach (File::AllFiles(__DIR__ . '/Routes') as $partial) {
 Route::get('/', function () {
     return Redirect::to('/dashboard');
 });
+
+
