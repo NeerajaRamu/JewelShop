@@ -29,10 +29,27 @@ Auth::routes();
 Route::get('/home', 'HomeController@index')->name('home');
 Route::get('/profile', ['as' => 'profile', 'uses' => 'ProfileController@index']);
 Route::get('/users', ['as' => 'users', 'uses' => 'UsersController@index']);
+Route::get('/users/edit/{id}', [
+            'as'   => 'users.edit',
+            'uses' => 'UsersController@edit',
+        ]);
+Route::post('/users/update/{id}', [
+            'as'   => 'users.update',
+            'uses' => 'UsersController@update',
+        ]);
+
+//Route::get('/users/editUser/{id}', 'UsersController@editUser')->name('users.editUser');
+//Route::get('/users/edit/{id}', 'UsersController@edit')->name('users.edit');
+Route::get('/users/edit/{id}', 'UsersController@edit')->name('users.edit');
+Route::get('/users/destroy/{id}', 'UsersController@destroy')->name('users.destroy');
+//Route::get('/users/edit/{id}', 'UsersController@edit')->name('users.edit');
+//Route::get('/posts/details/{id}', 'PostsController@details')->name('posts.details');
+//Route::get('/users/edit', ['as' => '/users/edit', 'uses' => 'UsersController@edit']);
 //Route::get('/auth/register', ['as' => 'auth/register', 'uses' => 'RegisterController@index']);
-Route::get('/CreateSale', ['as' => 'CreateSale', 'uses' => 'SalesController@create']);
-Route::get('/MySales', ['as' => 'MySales', 'uses' => 'SalesController@index']);
-Route::get('/ShopSales', ['as' => 'ShopSales', 'uses' => 'SalesController@index']);
+Route::get('/sales/sales', ['as' => 'sales/sales', 'uses' => 'SalesController@index']);
+Route::get('/create-sale', ['as' => 'create-sale', 'uses' => 'SalesController@create']);
+Route::get('/my-sales', ['as' => 'my-sales', 'uses' => 'SalesController@index']);
+Route::get('/shop-sales', ['as' => 'shop-sales', 'uses' => 'SalesController@index']);
 //Route::get('auth/logout', 'Auth\AuthController@logout');
 //Route::get('/auth/logout', 'Auth\AuthController@logout');
 //Route::get('logout', ['as' => 'logout', 'uses' => 'Auth\AuthController@getLogout']);

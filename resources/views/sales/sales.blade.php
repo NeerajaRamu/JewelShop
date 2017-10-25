@@ -4,10 +4,11 @@
 <div class="container">
     <div class="row wrapper border-bottom white-bg page-heading right">
         <div class="col-md-10 col-md-offset-2">
-            <h2>All Users: </h2>
+            <h2>My Sales: </h2>
             <ol class="breadcrumb">
                 <li><a href="{{ route('home') }}">Dashboard</a></li>
-                <li class="active"><strong>Users</li>
+                <li><a href="{{ route('sales/sales') }}">Sales</a></li>
+                <li class="active"><strong>My Sales</li>
             </ol>
         </div>
     </div>
@@ -19,22 +20,24 @@
                     <table class="table table-striped">
     <thead>
       <tr>
-        <th>Username</th>
-        <th>Email</th>
-        <th>Role</th>
-        <th>Region</th>
-        <th>Status</th>
+        <th>Name</th>
+        <th>Item name</th>
+        <th>Quantity</th>
+        <th>Gold Cost</th>
+        <th>Total cost</th>
+        <th>Date</th>
         <th colspan="2" align="center">Actions</th>
       </tr>
     </thead>
     <tbody>
-      @foreach($userData as $val)
+      @foreach($sales as $val)
       <tr>
-            <td>{{ $val->name }}</td>
-            <td>{{ $val->email }}</td>
-            <td>{{ $val->role->name }}</td>
-            <td>{{ $val->region->name }}</td>
-            <td>{{ ($val->status == '1')?'active':'inactive' }}</td>
+            <td>{{ $val->customer_name }}</td>
+            <td>{{ $val->ornament_name }}</td>
+            <td>{{ $val->quantity_sold }}</td>
+            <td>{{ $val->gold_cost }}</td>
+            <td>{{ $val->total_cost}}</td>
+            <td>{{ $val->sold_date }}</td>
             <td>
 <!--          <a href="{{ route('users.edit', ['id' => $val->id]) }}" class="btn btn-primary">Edit</a></td>-->
               <a href="{{ route('users.edit', ['id' => $val->id]) }}" class="btn btn-primary">Edit</a>
@@ -51,4 +54,3 @@
 </div>
 
 @endsection
-

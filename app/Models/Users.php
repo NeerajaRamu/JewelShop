@@ -77,13 +77,13 @@ class Users extends Authenticatable
         return false;
     }
 
-    public function Role()
+    public function role()
     {
         return $this->belongsTo('App\Models\Roles', 'role_id');
     }
 //select * from `roles` where `roles`.`role_id` is null and `roles`.`role_id` is not null and `name` = ?' (length=102)
     //select * from `roles` where `roles`.`users_id` is null and `roles`.`users_id` is not null and `name` = ?' (length=104)
-    public function Region()
+    public function region()
     {
 	return $this->belongsTo('App\Models\Region', 'region_id');
     }

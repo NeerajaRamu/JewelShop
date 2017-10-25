@@ -37,16 +37,16 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 
                                                                           <li id="menu-academico" ><a href="#"><i class="fa fa-picture-o" aria-hidden="true"></i><span>Users</span> <span class="fa fa-angle-right" style="float: right"></span><div class="clearfix"></div></a>
 										   <ul id="menu-academico-sub" >
-										   <li id="menu-academico-avaliacoes" ><a href="{{ route('register') }}">Create User</a></li>
-											<li id="menu-academico-avaliacoes" ><a href="{{ route('users') }}">View Users</a></li>
+                                                                                        <li id="menu-academico-avaliacoes" ><a href="{{ route('users') }}">View Users</a></li>
+                                                                                        <li id="menu-academico-avaliacoes" ><a href="{{ route('register') }}">Create User</a></li>
                                                                                     </ul>
 										</li>
 
 									<li id="menu-academico" ><a href="#"><i class="fa fa-bar-chart" aria-hidden="true"></i><span>Sales</span> <span class="fa fa-angle-right" style="float: right"></span><div class="clearfix"></div></a>
 										   <ul id="menu-academico-sub" >
-                                                                                    <li id="menu-academico-avaliacoes" ><a href="{{ route('CreateSale') }}">Create Sale</a></li>
-										   <li id="menu-academico-avaliacoes" ><a href="{{ route('MySales') }}">My Sales</a></li>
-											<li id="menu-academico-avaliacoes" ><a href="{{ route('ShopSales') }}">Shop Sales</a></li>
+                                                                                    <li id="menu-academico-avaliacoes" ><a href="{{ route('create-sale') }}">Create Sale</a></li>
+										   <li id="menu-academico-avaliacoes" ><a href="{{ route('my-sales') }}">My Sales</a></li>
+											<li id="menu-academico-avaliacoes" ><a href="{{ route('shop-sales') }}">Shop Sales</a></li>
 
 										  </ul>
 										</li>

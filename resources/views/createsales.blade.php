@@ -1,24 +1,40 @@
 @extends('layouts.app')
 @include('layouts.sidebar')
 @section('content')
+<html>
 <head>
-<link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet">
+    <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+<!--<link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.5.0/css/bootstrap-datepicker.css" rel="stylesheet">
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.5.0/js/bootstrap-datepicker.js"></script>
-
- <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet">
-    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
-    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.9.0/moment.min.js"></script>
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.37/css/bootstrap-datetimepicker.min.css" rel="stylesheet">
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.37/js/bootstrap-datetimepicker.min.js"></script>
-
-
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.5.0/js/bootstrap-datepicker.js"></script>-->
 
 </head>
+<body>
+
+
+        <script type="text/javascript">
+            // When the document is ready
+            $(document).ready(function () {
+
+                $('#example1').datetimepicker({
+                    format: "dd/mm/yyyy"
+                });
+
+            });
+        </script>
+
 <div class="container">
+    <div class="row wrapper border-bottom white-bg page-heading right">
+        <div class="col-md-8 col-md-offset-2">
+            <h2>Create Sale: </h2>
+            <ol class="breadcrumb">
+                <li><a href="{{ route('home') }}">Dashboard</a></li>
+                <li class="active"><strong>Create Sale</li>
+            </ol>
+        </div>
+    </div>
     <div class="row">
         <div class="col-md-8 col-md-offset-2">
             <div class="panel panel-default">
@@ -41,8 +57,16 @@
                                 @endif
                             </div>
                         </div>
-                        <div class="form-group">
-                            <label for="example1" class="col-md-4 control-label">Sold Date</label>
+<div class="form-group">
+                            <label for="date" class="col-md-4 control-label">Sold Dateeee</label><div class="col-md-6">
+<input  class="form-control" type="text" placeholder="click to show datepicker"  id="example1">
+
+
+                            </div>
+                        </div>
+                           <div class="form-group">
+<!--                            {!! Form::label('soldDate', 'Email', ['class' => 'col-sm-2 control-label']) !!}-->
+                            <label for="date" class="col-md-4 control-label">Sold Date</label>
 
                             <div class="col-md-6">
                                 <input  class="form-control" type="text" placeholder="click to show datepicker"  id="example1">
@@ -50,6 +74,13 @@
                         </div>
                         <div class="form-group">
                             <label for="quantity" class="col-md-4 control-label">Ornament name</label>
+
+                            <div class="col-md-6">
+                                <input id="quantity" type="" class="form-control" name="quantity" value="" required>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="quantity" class="col-md-4 control-label">Comment's</label>
 
                             <div class="col-md-6">
                                 <input id="quantity" type="" class="form-control" name="quantity" value="" required>
@@ -92,8 +123,7 @@
         </div>
     </div>
 </div>
-@endsection
-<script type="text/javascript">
+ <script type="text/javascript">
             // When the document is ready
             $(document).ready(function () {
 
@@ -103,3 +133,6 @@
 
             });
         </script>
+         </body>
+</html>
+@endsection
