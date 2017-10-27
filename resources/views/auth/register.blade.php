@@ -15,7 +15,7 @@
     <div class="row">
         <div class="col-md-8 col-md-offset-2">
             <div class="panel panel-default">
-                
+
 
                 <div class="panel-body">
                     <form class="form-horizontal" method="POST" action="{{ route('register') }}">
@@ -60,6 +60,36 @@
                                         <strong>{{ $errors->first('password') }}</strong>
                                     </span>
                                 @endif
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="sold" class="col-md-4 control-label">Role</label>
+
+                            <div class="col-md-6">
+                                <select class="form-control m-bot15" name="role_id">
+                                    @if ($roles->count())
+
+                                    @foreach($roles as $role)
+                                    <option value="{{ $role->id }}" </option>
+                                    @endforeach
+                                    @endif
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="cost" class="col-md-4 control-label">Region</label>
+
+                            <div class="col-md-6">
+                                <select class="form-control m-bot15" name="region_id">
+                                    @if ($regions->count())
+
+                                    @foreach($regions as $region)
+                                    <option value="{{ $region->id }}" </option>
+                                    @endforeach
+                                    @endif
+                                </select>
                             </div>
                         </div>
 

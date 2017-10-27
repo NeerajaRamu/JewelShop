@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Models\Users as Users;
 use Illuminate\Support\Facades\Auth;
 use App\Models\Sales;
+use Illuminate\Support\Facades\DB;
 
 class SalesController extends Controller
 {
@@ -34,7 +35,7 @@ class SalesController extends Controller
     {
         $userId = Auth::user()->id;
         //$userData = Users::find($userId);
-        $sales = Sales::where('user_id', '=', '2')->get();
+        $sales = Sales::where('user_id', '=', $userId)->get();
 
         return view('sales/sales', compact('sales'));
         //return View::make('profile',compact('userData'));
@@ -62,5 +63,80 @@ class SalesController extends Controller
         $userData = Users::get();//echo "<pre>";print_r($userData);echo "</pre>";exit;
 
         return view('createsales', compact('userData'));
+    }
+
+    public function store(Request $request, Sales $sale)
+    {
+        $userId = Auth::user()->id;
+        $sale->user_id       = $userId;
+        $sale->sold_date     = $request->input('sold_date');
+        $sale->customer_name = $request->input('name');
+        $sale->ornament_name = $request->input('ornament');
+        $sale->quantity_sold = $request->input('sold');
+        $sale->gold_cost     = $request->input('cost');
+        $sale->total_cost    = $request->input('total_cost');
+        $sale->save();
+
+        return redirect()->back()->with('message', 'Successfully updated user');
+
+       // echo "Heloo";echo array_get($request, 'name');exit;
+    }
+
+    public function edit(Request $request, Sales $sale, $id)
+    {
+//        $userId     = Auth::user()->id;
+//        $salesId    = Sales::where('id', '=', $id)->get();
+        $saleData = Sales::where('id', '=', $id)->get();
+
+//        if (!empty($user)) {
+//            $sale->user_id       = $userId;
+//            $sale->sold_date     = $request->input('sold_date');
+//            $sale->customer_name = $request->input('name');
+//            $sale->ornament_name = $request->input('ornament');
+//            $sale->quantity_sold = $request->input('sold');
+//            $sale->gold_cost     = $request->input('cost');
+//            $sale->total_cost    = $request->input('total_cost');
+//        $driver->update();
+//        }
+
+        return view('sales/edit', compact('saleData'));
+//
+
+//        return view('users_edit', compact('user', 'roles', 'regions'));
+    }
+
+    public function update(Request $request, Sales $editSale,$id)
+    {
+        $userId     = Auth::user()->id;
+        $data =
+        [
+            'user_id' => $userId,
+            'customer_name' =>  $request->input('name'),
+            'sold_date' => $request->input('sold_date'),
+            'ornament_name'=> $request->input('ornament'),
+            'quantity_sold' => $request->input('sold'),
+            'gold_cost' =>  $request->input('cost'),
+            'total_cost' => $request->input('total_cost'),
+
+        ];
+
+        Sales::where('id', $id)->update($data);
+
+        return redirect()->back()->with('message', 'Successfully updated user');
+    }
+
+    public function destroy($id)
+    {
+
+//        if (!$this->user->can(['web.full_access', 'web.users.destroy'])) {
+//            return View::make('deployments.unauthorized');
+//        }
+
+        $destroySales = Sales::find($id);
+        $destroySales->delete();
+
+        // redirect
+       // Session::flash('message', 'Successfully deleted the user!');
+        //return Redirect::to('users');
     }
 }

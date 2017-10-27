@@ -3,12 +3,12 @@
 @section('content')
 <div class="container">
     <div class="row wrapper border-bottom white-bg page-heading right">
-        <div class="col-lg-8">
-            <h2>Edit User: </h2>
+        <div class="col-md-8 col-md-offset-2">
+            <h2>Create User: </h2>
             <ol class="breadcrumb">
                 <li><a href="{{ route('home') }}">Dashboard</a></li>
                 <li><a href="{{ route('users') }}">Users</a></li>
-                <li class="active"><strong>Edit User</strong></li>
+                <li class="active"><strong>Create User</strong></li>
             </ol>
         </div>
     </div>
@@ -18,16 +18,14 @@
 
 
                 <div class="panel-body">
-                    @foreach($user as $val)
-<!--                    {{ route('users.edit', 'Supervisor') }}-->
-                    <form class="form-horizontal" method="POST" action="{{ route('users.update', ['id' => $val->id]) }} ">
+                    <form class="form-horizontal" method="POST" action="{{ route('users.store') }}">
                         {{ csrf_field() }}
 
                         <div class="form-group{{ $errors->has('name') ? ' has-error' : '' }}">
                             <label for="name" class="col-md-4 control-label">Name</label>
 
                             <div class="col-md-6">
-                                <input id="name" type="text" class="form-control" name="name" value="{{ $val->name }}" required autofocus>
+                                <input id="name" type="text" class="form-control" name="name" value="{{ old('name') }}" required autofocus>
 
                                 @if ($errors->has('name'))
                                     <span class="help-block">
@@ -36,27 +34,43 @@
                                 @endif
                             </div>
                         </div>
-                        <div class="form-group">
-                            <label for="date" class="col-md-4 control-label">Email Id</label>
+
+                        <div class="form-group{{ $errors->has('email') ? ' has-error' : '' }}">
+                            <label for="email" class="col-md-4 control-label">E-Mail Address</label>
 
                             <div class="col-md-6">
-                                <input id="name" type="text" class="form-control" name="email" value="{{ $val->email }}" required autofocus>
+                                <input id="email" type="email" class="form-control" name="email" value="{{ old('email') }}" required>
+
+                                @if ($errors->has('email'))
+                                    <span class="help-block">
+                                        <strong>{{ $errors->first('email') }}</strong>
+                                    </span>
+                                @endif
                             </div>
                         </div>
-                        <div class="form-group">
-                            <label for="quantity" class="col-md-4 control-label">Password</label>
+
+                        <div class="form-group{{ $errors->has('password') ? ' has-error' : '' }}">
+                            <label for="password" class="col-md-4 control-label">Password</label>
 
                             <div class="col-md-6">
-                                <input id="quantity" type="password" class="form-control" name="password" value="" required>
+                                <input id="password" type="password" class="form-control" name="password" required>
+
+                                @if ($errors->has('password'))
+                                    <span class="help-block">
+                                        <strong>{{ $errors->first('password') }}</strong>
+                                    </span>
+                                @endif
                             </div>
                         </div>
+
                         <div class="form-group">
-                            <label for="quantity" class="col-md-4 control-label">Confirm Password</label>
+                            <label for="password-confirm" class="col-md-4 control-label">Confirm Password</label>
 
                             <div class="col-md-6">
-                                <input id="quantity" type="password" class="form-control" name="confirm_password" value="" required>
+                                <input id="password-confirm" type="password" class="form-control" name="password_confirmation" required>
                             </div>
                         </div>
+
                         <div class="form-group">
                             <label for="sold" class="col-md-4 control-label">Role</label>
 
@@ -65,7 +79,7 @@
                                     @if ($roles->count())
 
                                     @foreach($roles as $role)
-                                    <option value="{{ $role->id }}" {{ $val->role_id == $role->id ? 'selected="selected"' : '' }}>{{ $role->name }}</option>
+                                    <option value="{{ $role->id }}">{{ $role->name }}</option>
                                     @endforeach
                                     @endif
                                 </select>
@@ -80,18 +94,29 @@
                                     @if ($regions->count())
 
                                     @foreach($regions as $region)
-                                    <option value="{{ $region->id }}" {{ $val->region_id == $region->id ? 'selected="selected"' : '' }}>{{ $region->name }}</option>
+                                    <option value="{{ $region->id }}">{{ $region->name }} </option>
                                     @endforeach
                                     @endif
                                 </select>
                             </div>
                         </div>
 
-                        @endforeach
+                        <div class="form-group">
+                            <label for="cost" class="col-md-4 control-label">Status</label>
+
+                            <div class="col-md-6">
+                                <select class="form-control m-bot15" name="status">
+                                    @foreach($status as $statusId => $statusVal)
+                                    <option value="{{ $statusId }}">{{ $statusVal }} </option>
+                                    @endforeach
+                                </select>
+                            </div>
+                        </div>
+
                         <div class="form-group">
                             <div class="col-md-6 col-md-offset-4">
                                 <button type="submit" class="btn btn-primary">
-                                    Update User
+                                    Create User
                                 </button>
                             </div>
                         </div>

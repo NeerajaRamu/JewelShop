@@ -6,10 +6,16 @@
             <file>file:/var/www/html/Projects/JewelShop/resources/views/users_edit.blade.php</file>
             <file>file:/var/www/html/Projects/JewelShop/app/Models/Users.php</file>
             <file>file:/var/www/html/Projects/JewelShop/app/Http/Controllers/SalesController.php</file>
+            <file>file:/var/www/html/Projects/JewelShop/app/Http/Controllers/UsersController.php</file>
+            <file>file:/var/www/html/Projects/JewelShop/database/seeds/UsersSeeder.php</file>
+            <file>file:/var/www/html/Projects/JewelShop/resources/views/createsales.blade.php</file>
             <file>file:/var/www/html/Projects/JewelShop/resources/views/layouts/sidebar.blade.php</file>
             <file>file:/var/www/html/Projects/JewelShop/resources/views/users.blade.php</file>
+            <file>file:/var/www/html/Projects/JewelShop/.env</file>
             <file>file:/var/www/html/Projects/JewelShop/routes/web.php</file>
-            <file>file:/var/www/html/Projects/JewelShop/app/Http/Controllers/UsersController.php</file>
+            <file>file:/var/www/html/Projects/JewelShop/resources/views/sales/sales.blade.php</file>
+            <file>file:/var/www/html/Projects/JewelShop/resources/views/create.blade.php</file>
+            <file>file:/var/www/html/Projects/JewelShop/app/Http/Controllers/Auth/RegisterController.php</file>
         </group>
     </open-files>
 </project-private>

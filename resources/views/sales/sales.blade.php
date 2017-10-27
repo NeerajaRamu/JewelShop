@@ -40,9 +40,9 @@
             <td>{{ $val->sold_date }}</td>
             <td>
 <!--          <a href="{{ route('users.edit', ['id' => $val->id]) }}" class="btn btn-primary">Edit</a></td>-->
-              <a href="{{ route('users.edit', ['id' => $val->id]) }}" class="btn btn-primary">Edit</a>
+              <a href="{{ route('sales.edit', ['id' => $val->id]) }}" class="btn btn-primary">Edit</a>
               <td>
-          <a href="{{ route('users.destroy', $val->id) }}" class="btn btn-info">Delete</a>
+          <a href="{{ route('sales.destroy', $val->id) }}" class="btn btn-info">Delete</a>
       </tr>
       @endforeach
     </tbody>

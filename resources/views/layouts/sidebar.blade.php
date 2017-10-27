@@ -5,14 +5,14 @@
 Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, SonyEricsson, Motorola web design" />
 <script type="application/x-javascript"> addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false); function hideURLbar(){ window.scrollTo(0,1); } </script>
 <!-- Bootstrap Core CSS -->
-<link href="../assets/bootstrap.min.css" rel='stylesheet' type='text/css' />
+<link href="http://localhost:8003/assets/js/bootstrap.min.css" rel='stylesheet' type='text/css' />
 <!-- Custom CSS -->
-<link href="../assets/css/style.css" rel='stylesheet' type='text/css' />
+<link href="http://localhost:8003/assets/css/style.css" rel='stylesheet' type='text/css' />
 <link rel="stylesheet" href="../assets/css/morris.css" type="text/css"/>
 <!-- Graph CSS -->
-<link href="../assets/css/font-awesome.css" rel="stylesheet">
+<link href="http://localhost:8003/assets/css/font-awesome.css" rel="stylesheet">
 <!-- jQuery -->
-<script src="../assets/js/jquery-2.1.4.min.js"></script>
+<script src="http://localhost:8003/assets/js/jquery-2.1.4.min.js"></script>
 <!-- //jQuery -->
 <link href='//fonts.googleapis.com/css?family=Roboto:700,500,300,100italic,100,400' rel='stylesheet' type='text/css'/>
 <link href='//fonts.googleapis.com/css?family=Montserrat:400,700' rel='stylesheet' type='text/css'>
@@ -38,7 +38,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                                                                           <li id="menu-academico" ><a href="#"><i class="fa fa-picture-o" aria-hidden="true"></i><span>Users</span> <span class="fa fa-angle-right" style="float: right"></span><div class="clearfix"></div></a>
 										   <ul id="menu-academico-sub" >
                                                                                         <li id="menu-academico-avaliacoes" ><a href="{{ route('users') }}">View Users</a></li>
-                                                                                        <li id="menu-academico-avaliacoes" ><a href="{{ route('register') }}">Create User</a></li>
+                                                                                        <li id="menu-academico-avaliacoes" ><a href="{{ route('users.create') }}">Create User</a></li>
                                                                                     </ul>
 										</li>
 

@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Models\Users as Users;
 use App\Models\Roles as Roles;
 use App\Models\Region as Regions;
+use Illuminate\Support\Facades\Hash;
 
 class UsersController extends Controller
 {
@@ -94,49 +95,72 @@ class UsersController extends Controller
         //return view('profile');
     }
 
+    public function create()
+    {
+        $roles      = Roles::all();
+        $regions    = Regions::all();
+        $status     = array ('1' => 'Active', '0' => 'Inactive');
+
+        return view('create', compact('roles', 'regions', 'status'));
+    }
+
+    public function store(Request $request, Users $user)
+    {
+        $user->name         = $request->input('name');
+        $user->email        = $request->input('email');
+        $user->password     = Hash::make($request->input('password'));
+        $user->role_id      = $request->input('role_id');
+        $user->region_id    = $request->input('region_id');
+        $user->status       = $request->input('status');
+        $user->save();
+
+        return redirect()->back()->with('message', 'Successfully updated user');
+
+       // echo "Heloo";echo array_get($request, 'name');exit;
+    }
+
     public function edit($id)
     {
-      $user = Users::where('id', '=', $id)->get();
+        $user = Users::where('id', '=', $id)->get();
         $roleId = $user[0]['role_id'];
         $regionId = $user[0]['region_id'];
 
         $user[0]['role'] = Roles::where('id', '=', $roleId)->value('name');
         $user[0]['region'] = Regions::where('id', '=', $regionId)->value('name');
         $roles = Roles::all();
-        $selectedRole = Users::first()->role_id;
         $regions = Regions::all();
-        $selectedRegion = Users::first()->region_id;
 
-//echo "<pre>";print_r($user);echo "</pre>";exit;
-        return view('users_edit', compact('user', 'roles', 'selectedRole', 'regions', 'selectedRegion'));
+        return view('users_edit', compact('user', 'roles', 'regions'));
     }
 
     public function update(Request $request, $id)
-    {//var_dump($request->get('name'));
+    {
         $editUser = Users::find($id);
 
         $editUser->name         = $request->input('name');
         $editUser->email        = $request->input('email');
-        //$editUser->password     = $request->input('password');
+        $editUser->password     = Hash::make($request->input('password'));
         $editUser->role_id      = $request->input('role_id');
         $editUser->region_id    = $request->input('region_id');
-        print_r($editUser);exit;
-        exit;
+
+        $editUser->save();
+
+        return redirect()->back()->with('message', 'Successfully updated user');
 
     }
 
     public function destroy($id)
-    {echo "sdfdsfdsf".$id;exit;
+    {
 
 //        if (!$this->user->can(['web.full_access', 'web.users.destroy'])) {
 //            return View::make('deployments.unauthorized');
 //        }
 
-        $destroyUser = Users::find($id);echo "Hiiii".$destroyUser;exit;
+        $destroyUser = Users::find($id);
         $destroyUser->delete();
 
         // redirect
-        Session::flash('message', 'Successfully deleted the user!');
+       // Session::flash('message', 'Successfully deleted the user!');
         return Redirect::to('users');
     }
 }

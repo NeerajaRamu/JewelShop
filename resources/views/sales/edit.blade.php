@@ -1,51 +1,33 @@
 @extends('layouts.app')
 @include('layouts.sidebar')
 @section('content')
-<html>
- <head>
-    <title>Bootstrap datepicker example text input with specifying date format</title>
-<!--    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet">
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.5.0/css/bootstrap-datepicker.css" rel="stylesheet">
-    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.js">
-    </script>-->
-    <script type="text/javascript">
-            // When the document is ready
-            $(document).ready(function () {
-
-                $('#example1').datepicker({
-                    format: "dd/mm/yyyy"
-                });
-
-            });
-        </script>
- </head>
-<body>
-
-
 <div class="container">
     <div class="row wrapper border-bottom white-bg page-heading right">
         <div class="col-md-8 col-md-offset-2">
-            <h2>Create Sale: </h2>
+            <h2>Edit Sale: </h2>
             <ol class="breadcrumb">
                 <li><a href="{{ route('home') }}">Dashboard</a></li>
-                <li class="active"><strong>Create Sale</li>
+                <li><a href="{{ route('my-sales') }}">Sales</a></li>
+                <li class="active"><strong>Edit Sales</strong></li>
             </ol>
         </div>
     </div>
     <div class="row">
         <div class="col-md-8 col-md-offset-2">
             <div class="panel panel-default">
-                <div class="panel-heading">Sale Form</div>
 
-                <div class="panel-body">
-                    <form class="form-horizontal" method="POST" action="{{ route('sales.store') }}">
+
+                <div class="panel-body">@foreach($saleData as $data)
+                    <form class="form-horizontal" method="POST" action="{{ route('sales.update', ['id' => $data->id])}}">
                         {{ csrf_field() }}
+
+
 
                         <div class="form-group{{ $errors->has('name') ? ' has-error' : '' }}">
                             <label for="name" class="col-md-4 control-label">Customer Name</label>
 
                             <div class="col-md-6">
-                                <input id="name" type="text" class="form-control" name="name" value="{{ old('name') }}" required autofocus>
+                                <input id="name" type="text" class="form-control" name="name" value="{{ $data->customer_name }}" required autofocus>
 
                                 @if ($errors->has('name'))
                                     <span class="help-block">
@@ -59,7 +41,7 @@
                             <label for="quantity" class="col-md-4 control-label">Ornament name</label>
 
                             <div class="col-md-6">
-                                <input id="quantity" type="" class="form-control" name="ornament" value="" required>
+                                <input id="quantity" type="" class="form-control" name="ornament" value="{{ $data->ornament_name }}" required>
                             </div>
                         </div>
 
@@ -68,7 +50,7 @@
                             <label for="date" class="col-md-4 control-label">Sold Date</label>
 
                             <div class="col-md-6">
-                                <input  class="form-control" type="text" placeholder="click to show datepicker" name="sold_date"  id="example1">
+                                <input  class="form-control" type="text" placeholder="click to show datepicker" name="sold_date" value="{{ $data->sold_date }}" id="example1">
                             </div>
                         </div>
 
@@ -76,14 +58,14 @@
                             <label for="quantity" class="col-md-4 control-label">Comment's</label>
 
                             <div class="col-md-6">
-                                <input id="quantity" type="" class="form-control" name="comments" value="" required>
+                                <input id="quantity" type="" class="form-control" name="comments" value="{{ $data->name }}" required>
                             </div>
                         </div>-->
                         <div class="form-group">
                             <label for="sold" class="col-md-4 control-label">Quantity Sold(in gms)</label>
 
                             <div class="col-md-6">
-                                <input id="sold" type="" class="form-control" name="sold" value="" required >
+                                <input id="sold" type="" class="form-control" name="sold" value="{{ $data->quantity_sold }}" required >
                             </div>
                         </div>
 
@@ -91,7 +73,7 @@
                             <label for="cost" class="col-md-4 control-label">Gold Cost</label>
 
                             <div class="col-md-6">
-                                <input id="email" type="cost" class="form-control" name="cost" value="" required>
+                                <input id="email" type="cost" class="form-control" name="cost" value="{{ $data->gold_cost }}" required>
                             </div>
                         </div>
 
@@ -99,7 +81,7 @@
                             <label for="total" class="col-md-4 control-label">Total Cost</label>
 
                             <div class="col-md-6">
-                                <input id="total" type="total" class="form-control" name="total_cost" value="" required>
+                                <input id="total" type="total" class="form-control" name="total_cost" value="{{ $data->total_cost }}" required>
                             </div>
                         </div>
 
@@ -110,13 +92,11 @@
                                 </button>
                             </div>
                         </div>
+@endforeach
                     </form>
                 </div>
             </div>
         </div>
     </div>
 </div>
-
-         </body>
-</html>
 @endsection
