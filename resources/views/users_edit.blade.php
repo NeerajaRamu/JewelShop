@@ -3,7 +3,7 @@
 @section('content')
 <div class="container">
     <div class="row wrapper border-bottom white-bg page-heading right">
-        <div class="col-lg-8">
+        <div class="col-lg-8 col-md-offset-2">
             <h2>Edit User: </h2>
             <ol class="breadcrumb">
                 <li><a href="{{ route('home') }}">Dashboard</a></li>
@@ -20,8 +20,10 @@
                 <div class="panel-body">
                     @foreach($user as $val)
 <!--                    {{ route('users.edit', 'Supervisor') }}-->
-                    <form class="form-horizontal" method="POST" action="{{ route('users.update', ['id' => $val->id]) }} ">
-                        {{ csrf_field() }}
+                    <form class="form-horizontal" method="POST" action="{{ route('users.update', ['id' => $val->id]) }}">
+                        <input type="hidden" name="_method" value="PUT">
+                        <input type="hidden" name="_token" value="<?php echo csrf_token(); ?>">
+
 
                         <div class="form-group{{ $errors->has('name') ? ' has-error' : '' }}">
                             <label for="name" class="col-md-4 control-label">Name</label>

@@ -144,7 +144,7 @@ class UsersController extends Controller
         $editUser->region_id    = $request->input('region_id');
 
         $editUser->save();
-
+        
         return redirect()->back()->with('message', 'Successfully updated user');
 
     }

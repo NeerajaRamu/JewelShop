@@ -35,7 +35,7 @@ Route::get('/users/edit/{id}', [
             'as'   => 'users.edit',
             'uses' => 'UsersController@edit',
         ]);
-Route::post('/users/update/{id}', [
+Route::put('/users/update/{id}', [
             'as'   => 'users.update',
             'uses' => 'UsersController@update',
         ]);
@@ -50,16 +50,16 @@ Route::get('/users/destroy/{id}', 'UsersController@destroy')->name('users.destro
 //Route::get('/auth/register', ['as' => 'auth/register', 'uses' => 'RegisterController@index']);
 Route::get('/sales/sales', ['as' => 'sales/sales', 'uses' => 'SalesController@index']);
 Route::get('/sales/edit/{id}', 'SalesController@edit')->name('sales.edit');
-Route::post('/sales/update/{id}', [
+Route::put('/sales/update/{id}', [
             'as'   => 'sales.update',
             'uses' => 'SalesController@update',
         ]);
-Route::get('/sales.destroy/{id}', 'SalesController@destroy')->name('sales.destroy');
+Route::delete('/sales.destroy/{id}', 'SalesController@destroy')->name('sales.destroy');
 Route::get('/create-sale', ['as' => 'create-sale', 'uses' => 'SalesController@create']);
 Route::post('/sales/store/', 'SalesController@store')->name('sales.store');
 //Route::post('/sales/store', ['as' => 'sales/store', 'uses' => 'SalesController@store']);
 Route::get('/my-sales', ['as' => 'my-sales', 'uses' => 'SalesController@index']);
-Route::get('/shop-sales', ['as' => 'shop-sales', 'uses' => 'SalesController@index']);
+Route::get('/shop-sales', ['as' => 'shop-sales', 'uses' => 'SalesController@shopSales']);
 //Route::get('auth/logout', 'Auth\AuthController@logout');
 //Route::get('/auth/logout', 'Auth\AuthController@logout');
 //Route::get('logout', ['as' => 'logout', 'uses' => 'Auth\AuthController@getLogout']);

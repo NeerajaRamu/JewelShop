@@ -8,6 +8,11 @@ use App\Models\Users as Users;
 use Illuminate\Support\Facades\Auth;
 use App\Models\Sales;
 use Illuminate\Support\Facades\DB;
+use Carbon\Carbon;
+use SoapClient;
+use SoapHeader;
+use App\Models\Region;
+use App\Models\AccessLogs;
 
 class SalesController extends Controller
 {
@@ -60,9 +65,18 @@ class SalesController extends Controller
         //$roleId = $userObj->Role()->toSql();echo "sdfdsf";var_dump($roleId);exit;
         //$roleId = $userObj->userRole()->where('id', '=', $userRoleId)->toSql();echo "sdfdsf";var_dump($roleId);exit;
        // $roleId = $userObj->userRole();echo "sdfdsf";echo "<pre>";print_r($roleId);echo "</pre>";exit;
-        $userData = Users::get();//echo "<pre>";print_r($userData);echo "</pre>";exit;
+       //
+       //
+       //
+        $userData = Users::get();
+        $dateTime = Carbon::now()->toDateTimeString();
+        $goldDetails = $this->getGoldPrice();
+        $goldPrice =  $goldDetails->GetBaseMetalPriceResult->Price;
 
-        return view('createsales', compact('userData'));
+        return view('createsales', compact('dateTime', 'goldPrice'));
+        //echo phpinfo();exit;
+
+
     }
 
     public function store(Request $request, Sales $sale)
@@ -122,7 +136,7 @@ class SalesController extends Controller
 
         Sales::where('id', $id)->update($data);
 
-        return redirect()->back()->with('message', 'Successfully updated user');
+        return redirect()->back()->with('message', 'Successfully updated Sales');
     }
 
     public function destroy($id)
@@ -134,9 +148,58 @@ class SalesController extends Controller
 
         $destroySales = Sales::find($id);
         $destroySales->delete();
-
+        return $this->index();
         // redirect
        // Session::flash('message', 'Successfully deleted the user!');
         //return Redirect::to('users');
+    }
+
+    public function getGoldPrice()
+    {
+    // define the SOAP client using the url for the service
+    $client = new SoapClient('http://globalmetals.xignite.com/xGlobalMetals.asmx?WSDL');
+
+    // create an array of parameters
+    $param = array(
+                   "MetalType" => "EngelhardGold",
+                    "Currency" => "INR");
+
+    // add authentication info
+    $xignite_header = new SoapHeader('http://www.xignite.com/services/',
+         "Header", array("Username" => "4FF07F18B7A84252ADFEA2E4802E19E8"));
+    $client->__setSoapHeaders(array($xignite_header));
+
+    // call the service, passing the parameters and the name of the operation
+    $result['goldPrice'] = $client->GetBaseMetalPrice($param);
+    // assess the results
+    if (is_soap_fault($result)) {
+         echo '<h2>Fault</h2><pre>';
+         print_r($result);
+         echo '</pre>';
+    } else {
+//         echo '<h2>Result</h2><pre>';
+//         print_r($result);
+//         echo '</pre>';
+    }
+    // print the SOAP request
+//    echo '<h2>Request</h2><pre>' . htmlspecialchars($client->__getLastRequest(), ENT_QUOTES) . '</pre>';
+//    // print the SOAP request Headers
+//    echo '<h2>Request Headers</h2><pre>' . htmlspecialchars($client->__getLastRequestHeaders(), ENT_QUOTES) . '</pre>';
+//    // print the SOAP response
+//    echo '<h2>Response</h2><pre>' . htmlspecialchars($client->__getLastResponse(), ENT_QUOTES) . '</pre>';
+
+    return $result['goldPrice'];
+    }
+
+    public function shopSales()
+    {
+        $regions['regions'] = Region::get()->pluck('name');//echo "sdfdsf";echo "<pre>";print_r($regions);echo "</pre>";exit;
+//        $userId = Auth::user()->id;
+//        //$userData = Users::find($userId);
+//        $sales = Sales::where('user_id', '=', $userId)->get();
+        $data = AccessLogs::get();
+//        echo "<pre>";print_r($data);echo "</pre>";exit;
+
+        return view('sales/shop-sales', compact('data', 'regions'));
     }
 }

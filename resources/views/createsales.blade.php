@@ -1,26 +1,6 @@
 @extends('layouts.app')
 @include('layouts.sidebar')
 @section('content')
-<html>
- <head>
-    <title>Bootstrap datepicker example text input with specifying date format</title>
-<!--    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet">
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.5.0/css/bootstrap-datepicker.css" rel="stylesheet">
-    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.js">
-    </script>-->
-    <script type="text/javascript">
-            // When the document is ready
-            $(document).ready(function () {
-
-                $('#example1').datepicker({
-                    format: "dd/mm/yyyy"
-                });
-
-            });
-        </script>
- </head>
-<body>
-
 
 <div class="container">
     <div class="row wrapper border-bottom white-bg page-heading right">
@@ -68,7 +48,7 @@
                             <label for="date" class="col-md-4 control-label">Sold Date</label>
 
                             <div class="col-md-6">
-                                <input  class="form-control" type="text" placeholder="click to show datepicker" name="sold_date"  id="example1">
+                                <input  class="form-control" type="text" placeholder="click to show datepicker" name="sold_date"  id="example1" value="{{$dateTime}}" readonly>
                             </div>
                         </div>
 
@@ -91,7 +71,7 @@
                             <label for="cost" class="col-md-4 control-label">Gold Cost</label>
 
                             <div class="col-md-6">
-                                <input id="email" type="cost" class="form-control" name="cost" value="" required>
+                                <input id="cost" type="cost" class="form-control" name="cost" value="{{ $goldPrice }}" readonly>
                             </div>
                         </div>
 
@@ -102,6 +82,7 @@
                                 <input id="total" type="total" class="form-control" name="total_cost" value="" required>
                             </div>
                         </div>
+<!--  <p>Date: <input type="text" id="datepicker"></p>-->
 
                         <div class="form-group">
                             <div class="col-md-6 col-md-offset-4">
@@ -117,6 +98,24 @@
     </div>
 </div>
 
-         </body>
-</html>
+<script>
+
+    $( document ).ready(function() {
+           $('#sold').change(function() {
+        $('[name="total_cost"]').val(parseInt($("#cost").val())*(parseInt($("#sold").val())));
+     });
+    });
+
+
+
+</script>
+
+<script>
+      $(function() {
+        $("#datepicker").datepicker();
+      });
+</script>
+
+
 @endsection
+

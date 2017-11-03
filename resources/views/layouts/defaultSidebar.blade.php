@@ -36,7 +36,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 										 <li id="menu-academico" ><a href="{{ route('profile') }}"><i class="fa fa-envelope nav_icon"></i><span>My Profile</span><div class="clearfix"></div></a></li>
 									<li id="menu-academico" ><a href="#"><i class="fa fa-bar-chart" aria-hidden="true"></i><span>Sales</span> <span class="fa fa-angle-right" style="float: right"></span><div class="clearfix"></div></a>
 										   <ul id="menu-academico-sub" >
-										   <li id="menu-academico-avaliacoes" ><a href="icons.html">My Sales</a></li>
+										   <li id="menu-academico-avaliacoes" ><a href="{{ route('my-sales') }}">My Sales</a></li>
 											<li id="menu-academico-avaliacoes" ><a href="typography.html">Shop Sales</a></li>
 											<li id="menu-academico-avaliacoes" ><a href="faq.html">Faq</a></li>
 										  </ul>

@@ -19,7 +19,8 @@
 
                 <div class="panel-body">@foreach($saleData as $data)
                     <form class="form-horizontal" method="POST" action="{{ route('sales.update', ['id' => $data->id])}}">
-                        {{ csrf_field() }}
+                        <input type="hidden" name="_method" value="PUT">
+                        <input type="hidden" name="_token" value="<?php echo csrf_token(); ?>">
 
 
 
@@ -50,7 +51,7 @@
                             <label for="date" class="col-md-4 control-label">Sold Date</label>
 
                             <div class="col-md-6">
-                                <input  class="form-control" type="text" placeholder="click to show datepicker" name="sold_date" value="{{ $data->sold_date }}" id="example1">
+                                <input  class="form-control" type="text" placeholder="click to show datepicker" name="sold_date" value="{{ $data->sold_date }}" id="example1" readonly>
                             </div>
                         </div>
 
@@ -73,7 +74,7 @@
                             <label for="cost" class="col-md-4 control-label">Gold Cost</label>
 
                             <div class="col-md-6">
-                                <input id="email" type="cost" class="form-control" name="cost" value="{{ $data->gold_cost }}" required>
+                                <input id="email" type="cost" class="form-control" name="cost" value="{{ $data->gold_cost }}" readonly>
                             </div>
                         </div>
 
@@ -81,7 +82,7 @@
                             <label for="total" class="col-md-4 control-label">Total Cost</label>
 
                             <div class="col-md-6">
-                                <input id="total" type="total" class="form-control" name="total_cost" value="{{ $data->total_cost }}" required>
+                                <input id="total" type="total" class="form-control" name="total_cost" value="{{ $data->total_cost }}" readonly>
                             </div>
                         </div>
 

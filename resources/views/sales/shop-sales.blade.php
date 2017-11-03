@@ -9,7 +9,7 @@
             <ol class="breadcrumb">
                 <li><a href="{{ route('home') }}">Dashboard</a></li>
                 <li><a href="{{ route('sales/sales') }}">Sales</a></li>
-                <li class="active"><strong>My Sales</li>
+                <li class="active"><strong>Shop Sales</li>
             </ol>
         </div>
     </div>
@@ -20,27 +20,27 @@
                 <div class="panel-body">
                     <table class="table table-striped">
     <thead>
+        <tr>{{ Form::select($regions['regions'], $regions['regions'], null, ['placeholder' => 'Select Region...'])}}</tr>
       <tr>
-        <th>Name</th>
-        <th>Item name</th>
-        <th>Quantity</th>
-        <th>Gold Cost</th>
-        <th>Total cost</th>
         <th>Date</th>
+        <th>User</th>
+        <th>Region</th>
+        <th>Total sold</th>
+        <th>Total cost</th>
+        <th>Hours Spent</th>
         <th colspan="2" align="center">Actions</th>
       </tr>
     </thead>
     <tbody>
-      @foreach($sales as $val)
+      @foreach($data as $val)
       <tr>
-            <td>{{ $val->customer_name }}</td>
-            <td>{{ $val->ornament_name }}</td>
-            <td>{{ $val->quantity_sold }}</td>
-            <td>{{ $val->gold_cost }}</td>
-            <td>{{ $val->total_cost}}</td>
-            <td>{{ $val->sold_date }}</td>
+            <td>{{ $val->date }}</td>
+            <td>{{ $val->user_id }}</td>
+            <td>{{ $val->user_id }}</td>
+            <td>{{ $val->total_gold_sold }}</td>
+            <td>{{ $val->total_amount}}</td>
+            <td>{{ $val->total_hours_spent}}</td>
             <td>
-<!--          <a href="{{ route('users.edit', ['id' => $val->id]) }}" class="btn btn-primary">Edit</a></td>-->
               <a href="{{ route('sales.edit', ['id' => $val->id]) }}" class="btn btn-primary">Edit</a>
               <td>
                   <form action="{{ route('sales.destroy', ['id' => $val->id])}}" method="post">
