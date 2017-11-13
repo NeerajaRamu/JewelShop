@@ -191,15 +191,29 @@ class SalesController extends Controller
     return $result['goldPrice'];
     }
 
-    public function shopSales()
+    public function shopSales(Request $request, $id = null)
     {
-        $regions['regions'] = Region::get()->pluck('name');//echo "sdfdsf";echo "<pre>";print_r($regions);echo "</pre>";exit;
+        if ($id!='') {
+            //$dat = $request->all(); print_r($dat);exit;
+            //print_r(Input::all());
+            $regionId = Region::where('id', '=', $id)->value('id');//echo "<pre>";print_r($regions['id']);echo "</pre>";exit;
+            $users = Users::where('region_id', '=', $regionId)->get();//echo "<pre>";print_r($users);echo "</pre>";exit;
+            $data = AccessLogs::whereIn('user_id', $users)->get();//echo "<pre>";print_r($data);echo "</pre>";exit;
+            $regions['regions'] = Region::where('id', '=',$regionId)->pluck('name','id');//echo "<pre>";print_r($regions['regions']);echo "</pre>";exit;
+
+            //return view('sales/shop-sales', compact('data', 'regions'));
+            //return Response::eloquent($data);
+            return response()->json(['return' => 'regions', 'data']);
+        } else {
+            $regions['regions'] = Region::pluck('name','id');
+            $data = AccessLogs::with('users')->get();//echo "<pre>";print_r($data);echo "</pre>";exit;
+//            $usersData = AccessLogs::with('users')->get();
+//            echo "<pre>";print_r($usersData);echo "</pre>";exit;
+            //$users = Users::where('id', '=', $region->user_id);
+        }
 //        $userId = Auth::user()->id;
 //        //$userData = Users::find($userId);
 //        $sales = Sales::where('user_id', '=', $userId)->get();
-        $data = AccessLogs::get();
-//        echo "<pre>";print_r($data);echo "</pre>";exit;
-
         return view('sales/shop-sales', compact('data', 'regions'));
     }
 }

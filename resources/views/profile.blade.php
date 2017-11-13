@@ -25,6 +25,7 @@
   <dd>{{$userRegion->name}}</dd>
   @endforeach
 </dl>
+                        <a href="{{ route('users.edit', ['id' => $val->id]) }}" class="btn btn-primary">Edit</a>
 
 </table>
                 </div>

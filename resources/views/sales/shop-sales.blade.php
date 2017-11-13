@@ -20,7 +20,7 @@
                 <div class="panel-body">
                     <table class="table table-striped">
     <thead>
-        <tr>{{ Form::select($regions['regions'], $regions['regions'], null, ['placeholder' => 'Select Region...'])}}</tr>
+        <tr>{{ Form::select('region_names', $regions['regions'], 'asdasdasd', ['placeholder' => 'Select Region...'])}}</tr>
       <tr>
         <th>Date</th>
         <th>User</th>
@@ -32,24 +32,23 @@
       </tr>
     </thead>
     <tbody>
-      @foreach($data as $val)
-      <tr>
+      @foreach($data as $val) 
+        <tr>
             <td>{{ $val->date }}</td>
-            <td>{{ $val->user_id }}</td>
-            <td>{{ $val->user_id }}</td>
+            <td>{{ $val->users->name }}</td>
+            <td>{{ $val->users->region->name }}</td>
             <td>{{ $val->total_gold_sold }}</td>
             <td>{{ $val->total_amount}}</td>
             <td>{{ $val->total_hours_spent}}</td>
             <td>
               <a href="{{ route('sales.edit', ['id' => $val->id]) }}" class="btn btn-primary">Edit</a>
               <td>
-                  <form action="{{ route('sales.destroy', ['id' => $val->id])}}" method="post">
- <input type="hidden" name="_token" value="<?php echo csrf_token(); ?>">
-<input type="hidden" name="_method" value="DELETE" >
-<input type="submit" value="delete " >
-</form>
-
-      </tr>
+                <form action="{{ route('sales.destroy', ['id' => $val->id]) }}" method="post">
+                    <input type="hidden" name="_token" value="<?php echo csrf_token(); ?>">
+                    <input type="hidden" name="_method" value="DELETE" >
+                    <input type="submit" value="delete ">
+                </form>
+        </tr>
       @endforeach
     </tbody>
 </table>
@@ -58,5 +57,30 @@
         </div>
     </div>
 </div>
+<script type="text/javascript">
+    $( document ).ready(function() {
+        $("select[name='region_names']").change(function(){
+            var region_id = $(this).val();alert("Region"+region_id);
+            var token = $("input[name='_token']").val();
+            $.ajax({
+                url: "/shopSales/"+region_id,
+                method: 'GET',
+
+//                success: function(){
+//            console.log('data sent');
+//        }
+//                success: function(response){ // What to do if we succeed
+//
+//        alert(response);
+//    }
+
+
+              success: function(data) {alert("dsfsdfdsf"+data);
+                $("select[name='region_names'").html('data');
+            }
+          });
+        });
+    });
+</script>
 
 @endsection

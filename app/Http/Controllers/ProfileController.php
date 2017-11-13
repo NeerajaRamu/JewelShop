@@ -31,11 +31,6 @@ class ProfileController extends Controller
      */
     public function index()
     {
-        //$this->userRepository->getUsers();
-        //Users::where()
-        //Device::where('serial', $deviceSerial)->value('manufacturer');
-        // Get the user data
-        //$userroleId = user->id;echo "sdfsdfds".$userroleId;exit;
         $userObj = new Users();
         $loginUser = \Auth::User()->name;
 
@@ -47,15 +42,9 @@ class ProfileController extends Controller
 
         $userRole   = Users::where('role_id', '=', $userRoleId )->find(1)->Role;
         $userRegion = Users::where('region_id', '=', $userRegionId )->find(1)->Region;
-        //$regionId = $userObj->Region()->toSql();echo "sdfdsf";var_dump($regionId);exit;
-        //$roleId = $userObj->Role()->toSql();echo "sdfdsf";var_dump($roleId);exit;
-        //$roleId = $userObj->userRole()->where('id', '=', $userRoleId)->toSql();echo "sdfdsf";var_dump($roleId);exit;
-       // $roleId = $userObj->userRole();echo "sdfdsf";echo "<pre>";print_r($roleId);echo "</pre>";exit;
-        $userData = Users::where('name','Supervisor')
-                            ->get();//echo "<pre>";print_r($userData);echo "</pre>";exit;
+        $userData = Users::where('name',$loginUser)
+                            ->get();
 
         return view('profile', compact('userData', 'userRole', 'userRegion'));
-        //return View::make('profile',compact('userData'));
-        //return view('profile');
     }
 }
