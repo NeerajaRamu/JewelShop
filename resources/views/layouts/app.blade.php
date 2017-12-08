@@ -79,11 +79,16 @@
                 </div>
             </div>
         </nav>
-
+@if (Session::has('message'))
+    <div class="alert alert-info" align="center" style="font-size:14">
+                {{ Session::get('message') }}
+                </div>
+@endif
         @yield('content')
     </div>
 
     <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}"></script>
 </body>
+
 </html>

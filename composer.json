@@ -9,9 +9,13 @@
         "barryvdh/laravel-debugbar": "^3.1",
         "bosnadev/repositories": " 0.*",
         "fideloper/proxy": "~3.3",
+        "fx3costa/laravelchartjs": "^2.3",
+        "illuminate/html": "^5.0",
         "laravel/framework": "5.5.*",
         "laravel/tinker": "~1.0",
-        "laravelcollective/html": "^5.4.0"
+        "laravelcollective/html": "^5.5.0",
+        "yajra/laravel-datatables": "^1.0",
+        "yajra/laravel-datatables-oracle": "~8.0"
     },
     "require-dev": {
         "filp/whoops": "~2.0",

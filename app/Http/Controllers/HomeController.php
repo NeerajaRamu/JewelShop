@@ -4,30 +4,42 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use App\Models\AccessLogs;
+use Carbon;
 
-class HomeController extends Controller
-{
+class HomeController extends Controller {
+
     /**
      * Create a new controller instance.
      *
      * @return void
      */
-    public function __construct()
-    {
+    public function __construct() {
         $this->middleware('auth');
     }
 
     /**
-     * Show the application dashboard.
      *
-     * @return \Illuminate\Http\Response
+     * @param AccessLogs $accessLogs
+     * @return type
      */
-    public function index()
-    {
-        if (Auth::user()->role_id == '2')
-    {
+    public function index(AccessLogs $accessLogs) {
+        $todaysDateTime = Carbon\Carbon::now();
+        $timeIn         = $todaysDateTime->toTimeString();
+        $dateVal        = $todaysDateTime->toDateTimeString();
+        $todaysdate     = $todaysDateTime->toDateString();
+
+        $userData = AccessLogs::where('user_id', '=', Auth::user()->id)
+                        ->where('date', '=', $todaysdate)
+                        ->get();
+
+        if (count($userData) == '0') {
+            $accessLogs->user_id = Auth::user()->id;
+            $accessLogs->date = $todaysdate;
+            $accessLogs->time_in = $timeIn;
+            $accessLogs->save();
+        }
+
         return view('home');
-    }
-        return view('defaultHome');
     }
 }

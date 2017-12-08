@@ -18,11 +18,11 @@ class CreateAccessLogsTable extends Migration
                 $table->increments('id');
                 $table->integer('user_id')->unsigned();
                 $table->date('date');
-                $table->dateTime('time_in')->nullable();
-                $table->dateTime('time_out')->nullable();
-                $table->string('total_gold_sold');
-                $table->bigInteger('total_amount');
-                $table->bigInteger('total_hours_spent');
+                $table->time('time_in');
+                $table->time('time_out')->nullable();
+                $table->string('total_gold_sold')->nullable();;
+                $table->bigInteger('total_amount')->nullable();;
+                $table->bigInteger('total_hours_spent')->nullable();;
             });
 
             Schema::table('access_logs', function($table) {

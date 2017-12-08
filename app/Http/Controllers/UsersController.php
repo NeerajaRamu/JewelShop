@@ -3,11 +3,11 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-//use App\Repositories\UserRepository as UserRepo;
 use App\Models\Users as Users;
 use App\Models\Roles as Roles;
 use App\Models\Region as Regions;
 use Illuminate\Support\Facades\Hash;
+use App\Models\AccessLogs;
 
 class UsersController extends Controller
 {
@@ -33,68 +33,19 @@ class UsersController extends Controller
      */
     public function index(Users $users)
     {
-        //$this->userRepository->getUsers();
-        //Users::where()
-        //Device::where('serial', $deviceSerial)->value('manufacturer');
-        // Get the user data
-        //$userroleId = user->id;echo "sdfsdfds".$userroleId;exit;
-//        $userObj = new Users();
-
-
-//        $query = Users::with('roles')->where('role_id', '1');
-//echo "sdfdsfsf";echo "<pre>";print_r($query);echo "</pre>";exit;
-//$query = $this->model
-//            ->with('roles')
-//            ->where('deployment_id', $this->currentDeployment()->id);
-
-
-//        $userRoleId = Users::where('name','Supervisor')
-//                            ->value('role_id');
-//        $userRegionId = Users::where('name','Supervisor')
-//                            ->value('region_id');
-//        $userData['userRole']   = Users::find(1)->Role->name;
-//        $userData['userRegion'] = Users::find(1)->Region->name;//echo "Sdfsdfds";echo "<pre>";print_r($userData);echo "</pre>";exit;
-        //echo "Sdfsdfds";echo "<pre>";print_r($userData['userRegion']['name']);echo "</pre>";exit;
-        //$userData['userRegion'] = Users::where('region_id', '=', $userRegionId )->find(1)->Region;
-        //$regionId = $userObj->Region()->toSql();echo "sdfdsf";var_dump($regionId);exit;
-        //$roleId = $userObj->Role()->toSql();echo "sdfdsf";var_dump($roleId);exit;
-        //$roleId = $userObj->userRole()->where('id', '=', $userRoleId)->toSql();echo "sdfdsf";var_dump($roleId);exit;
-       // $roleId = $userObj->userRole();echo "sdfdsf";echo "<pre>";print_r($roleId);echo "</pre>";exit;
-//        $users = Users::with('role')->get();
-//        echo "sdfdsf";echo "<pre>";print_r($users);echo "</pre>";exit;
-//$students = Users::whereHas(
-//    'roles', function($q){
-//        $q->where('name', 'Supervisor');
-//    }
-//)->get();echo "<pre>";print_r($students);echo "</pre>";exit;
-//echo "<pre>";print_r($users->with('Role')->first());echo "</pre>";exit;
-        //$userData = $users->with('Role')->all();
-     //   $userData = $users::with('Role');
-      //  $userData['userRole']   = $users->with('Role');
-       // $userData['userRegion'] = Users::find(1)->Region->name;
-//echo $userData->role->name ;exit;
-
-
 
         $userData = Users::get();
-
         $userData = Users::with('role')->get();
-
         $userData = Users::with('region')->get();
-
-//        foreach ($users1 as $usr) {
-//            $userData['roles'] =  $usr->role->name;
-//            echo '<br>';
-//        }
-
-
-       // echo "<pre>";print_r($userData);echo "</pre>";exit;
+        $userData = Users:: paginate(2);
 
         return view('users', compact('userData'));
-        //return View::make('profile',compact('userData'));
-        //return view('profile');
     }
 
+    /**
+     *
+     * @return type
+     */
     public function create()
     {
         $roles      = Roles::all();
@@ -104,6 +55,12 @@ class UsersController extends Controller
         return view('create', compact('roles', 'regions', 'status'));
     }
 
+    /**
+     *
+     * @param Request $request
+     * @param Users $user
+     * @return type
+     */
     public function store(Request $request, Users $user)
     {
         $user->name         = $request->input('name');
@@ -114,11 +71,14 @@ class UsersController extends Controller
         $user->status       = $request->input('status');
         $user->save();
 
-        return redirect()->back()->with('message', 'Successfully updated user');
-
-       // echo "Heloo";echo array_get($request, 'name');exit;
+        return redirect()->back()->with('message', 'Successfully Created User');
     }
 
+    /**
+     *
+     * @param type $id
+     * @return type
+     */
     public function edit($id)
     {
         $user = Users::where('id', '=', $id)->get();
@@ -132,7 +92,12 @@ class UsersController extends Controller
 
         return view('users_edit', compact('user', 'roles', 'regions'));
     }
-
+    /**
+     *
+     * @param Request $request
+     * @param type $id
+     * @return type
+     */
     public function update(Request $request, $id)
     {
         $editUser = Users::find($id);
@@ -142,25 +107,35 @@ class UsersController extends Controller
         $editUser->password     = Hash::make($request->input('password'));
         $editUser->role_id      = $request->input('role_id');
         $editUser->region_id    = $request->input('region_id');
-
         $editUser->save();
-        
-        return redirect()->back()->with('message', 'Successfully updated user');
 
+        return redirect()->back()->with('message', 'Successfully Updated User');
     }
 
+    /**
+     *
+     * @param type $id
+     * @return type
+     */
     public function destroy($id)
     {
-
-//        if (!$this->user->can(['web.full_access', 'web.users.destroy'])) {
-//            return View::make('deployments.unauthorized');
-//        }
-
         $destroyUser = Users::find($id);
         $destroyUser->delete();
 
-        // redirect
-       // Session::flash('message', 'Successfully deleted the user!');
-        return Redirect::to('users');
+        return redirect()->back()->with('message', 'Successfully Deleted User');
+    }
+
+    /**
+     *
+     * @param Users $users
+     * @return type
+     */
+    public function getTimesheet(Users $users)
+    {
+        $loginId = \Auth::User()->id;
+
+        $timesheetData = AccessLogs::where('user_id', '=', $loginId)->get();
+
+        return view('timesheet', compact('timesheetData'));
     }
 }

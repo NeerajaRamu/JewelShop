@@ -17,12 +17,12 @@ class CreateSalesTable extends Migration
             Schema::create('sales', function (Blueprint $table) {
                 $table->increments('id');
                 $table->integer('user_id')->unsigned();
-                $table->dateTime('sold_date');
+                $table->date('sold_date');
                 $table->string('customer_name');
                 $table->string('ornament_name');
                 $table->string('quantity_sold');
-                $table->decimal('gold_cost');
-                $table->decimal('total_cost');
+                $table->integer('gold_cost');
+                $table->integer('total_cost');
                 $table->timestamps();
             });
 

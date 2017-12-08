@@ -44,21 +44,11 @@
                         </div>
 
                         <div class="form-group">
-<!--                            {!! Form::label('soldDate', 'Email', ['class' => 'col-sm-2 control-label']) !!}-->
                             <label for="date" class="col-md-4 control-label">Sold Date</label>
-
                             <div class="col-md-6">
-                                <input  class="form-control" type="text" placeholder="click to show datepicker" name="sold_date"  id="example1" value="{{$dateTime}}" readonly>
+                                <input  class="form-control" type="text" placeholder="click to show datepicker" name="sold_date"  id="example1" value="{{$todaysDate}}" readonly>
                             </div>
                         </div>
-
-<!--                        <div class="form-group">
-                            <label for="quantity" class="col-md-4 control-label">Comment's</label>
-
-                            <div class="col-md-6">
-                                <input id="quantity" type="" class="form-control" name="comments" value="" required>
-                            </div>
-                        </div>-->
                         <div class="form-group">
                             <label for="sold" class="col-md-4 control-label">Quantity Sold(in gms)</label>
 
@@ -71,7 +61,7 @@
                             <label for="cost" class="col-md-4 control-label">Gold Cost</label>
 
                             <div class="col-md-6">
-                                <input id="cost" type="cost" class="form-control" name="cost" value="{{ $goldPrice }}" readonly>
+                                <input id="cost" type="cost" class="form-control" name="cost" value="{{ $goldPrice }}" >
                             </div>
                         </div>
 
@@ -82,8 +72,6 @@
                                 <input id="total" type="total" class="form-control" name="total_cost" value="" required>
                             </div>
                         </div>
-<!--  <p>Date: <input type="text" id="datepicker"></p>-->
-
                         <div class="form-group">
                             <div class="col-md-6 col-md-offset-4">
                                 <button type="submit" class="btn btn-primary">

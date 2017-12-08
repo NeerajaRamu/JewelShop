@@ -12,20 +12,9 @@
 */
 
 Auth::routes();
-
 Route::group(['middleware' => 'auth'], function () {
     Route::get('/', 'Auth\LoginController@index')->name('home');
 });
-//Route::get('/', function () {
-//    return view('welcome');
-//});
-//
-//Auth::routes();
-//
-//Route::get('/home', 'HomeController@index')->name('home');
-//
-Auth::routes();
-
 Route::get('/home', 'HomeController@index')->name('home');
 Route::get('/users/create/', 'UsersController@create')->name('users.create');
 Route::post('/users/store/', 'UsersController@store')->name('users.store');
@@ -39,15 +28,7 @@ Route::put('/users/update/{id}', [
             'as'   => 'users.update',
             'uses' => 'UsersController@update',
         ]);
-
-//Route::get('/users/editUser/{id}', 'UsersController@editUser')->name('users.editUser');
-//Route::get('/users/edit/{id}', 'UsersController@edit')->name('users.edit');
-//Route::get('/users/edit/{id}', 'UsersController@edit')->name('users.edit');
 Route::get('/users/destroy/{id}', 'UsersController@destroy')->name('users.destroy');
-//Route::get('/users/edit/{id}', 'UsersController@edit')->name('users.edit');
-//Route::get('/posts/details/{id}', 'PostsController@details')->name('posts.details');
-//Route::get('/users/edit', ['as' => '/users/edit', 'uses' => 'UsersController@edit']);
-//Route::get('/auth/register', ['as' => 'auth/register', 'uses' => 'RegisterController@index']);
 Route::get('/sales/sales', ['as' => 'sales/sales', 'uses' => 'SalesController@index']);
 Route::get('/sales/edit/{id}', 'SalesController@edit')->name('sales.edit');
 Route::put('/sales/update/{id}', [
@@ -57,12 +38,21 @@ Route::put('/sales/update/{id}', [
 Route::delete('/sales.destroy/{id}', 'SalesController@destroy')->name('sales.destroy');
 Route::get('/create-sale', ['as' => 'create-sale', 'uses' => 'SalesController@create']);
 Route::post('/sales/store/', 'SalesController@store')->name('sales.store');
-//Route::post('/sales/store', ['as' => 'sales/store', 'uses' => 'SalesController@store']);
 Route::get('/my-sales', ['as' => 'my-sales', 'uses' => 'SalesController@index']);
 Route::get('/shop-sales', ['as' => 'shop-sales', 'uses' => 'SalesController@shopSales']);
 Route::post('/shop-sales', ['as' => 'shop-sales', 'uses' => 'SalesController@shopSales']);
-//Route::post('/sales.shopSales/{id}', 'SalesController@shopSales')->name('sales.shopSales');
-Route::get('/shopSales/{id}', 'SalesController@shopSales')->name('shopSales');
-//Route::get('auth/logout', 'Auth\AuthController@logout');
-//Route::get('/auth/logout', 'Auth\AuthController@logout');
-//Route::get('logout', ['as' => 'logout', 'uses' => 'Auth\AuthController@getLogout']);
+Route::get('/region-shop-sales', ['as' => 'region-shop-sales', 'uses' => 'SalesController@RegionShopSales']);
+Route::post('/sales.shopSales/{id}', 'SalesController@shopSales')->name('sales.shopSales');
+Route::get('/clock-out', 'ProfileController@clockOut')->name('clock-out');
+Route::post('/profile/updateLogs/', 'ProfileController@updateLogs')->name('profile.updateLogs');
+Route::get('/timesheet', ['as' => 'timesheet', 'uses' => 'UsersController@getTimesheet']);
+//Route::post('/searchsales/{id}', 'UsersController@store')->name('searchsales');
+Route::get('/searchsales/{id}', ['as' => 'searchsales', 'uses' => 'SalesController@searchSales']);
+Route::get('/chartjs', 'SalesController@chartjs')->name('chartjs');
+Route::get('/all-sales', 'SalesController@allSales')->name('all-sales');
+//Route::get ( '/', function () {
+//    $data = Users::all ();
+//    return view ( 'all-sales' )->withData ( $data );
+//} );
+
+//Route::post('allposts', 'SalesController@allPosts' )->name('allposts');

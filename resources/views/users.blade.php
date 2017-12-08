@@ -17,33 +17,39 @@
 
                 <div class="panel-body">
                     <table class="table table-striped">
-    <thead>
-      <tr>
-        <th>Username</th>
-        <th>Email</th>
-        <th>Role</th>
-        <th>Region</th>
-        <th>Status</th>
-        <th colspan="2" align="center">Actions</th>
-      </tr>
-    </thead>
-    <tbody>
-      @foreach($userData as $val)
-      <tr>
-            <td>{{ $val->name }}</td>
-            <td>{{ $val->email }}</td>
-            <td>{{ $val->role->name }}</td>
-            <td>{{ $val->region->name }}</td>
-            <td>{{ ($val->status == '1')?'active':'inactive' }}</td>
-            <td>
-<!--          <a href="{{ route('users.edit', ['id' => $val->id]) }}" class="btn btn-primary">Edit</a></td>-->
-              <a href="{{ route('users.edit', ['id' => $val->id]) }}" class="btn btn-primary">Edit</a>
-              <td>
-          <a href="{{ route('users.destroy', $val->id) }}" class="btn btn-info">Delete</a>
-      </tr>
-      @endforeach
-    </tbody>
-</table>
+                        <thead>
+                            <tr>
+                                <th>Username</th>
+                                <th>Email</th>
+                                <th>Role</th>
+                                <th>Region</th>
+                                <th>Status</th>
+                                @if (\Auth::User()->name == "Supervisor")
+                                <th colspan="2" align="center">Actions</th>
+                                @endif
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach($userData as $val)
+                            <tr>
+                                <td>{{ $val->name }}</td>
+                                <td>{{ $val->email }}</td>
+                                <td>{{ $val->role->name }}</td>
+                                <td>{{ $val->region->name }}</td>
+                                <td>{{ ($val->status == '1')?'active':'inactive' }}</td>
+                                @if (\Auth::User()->name == "Supervisor")
+                                <td>
+                                    <a href="{{ route('users.edit', ['id' => $val->id]) }}" class="btn btn-primary">Edit</a>
+                                </td>
+                                <td>
+                                    <a href="{{ route('users.destroy', $val->id) }}" class="btn btn-info">Delete</a>
+                                </td>
+                                @endif
+                            </tr>
+                            @endforeach
+                        </tbody>
+                    </table>
+                    {!! $userData->render() !!}
                 </div>
             </div>
         </div>
